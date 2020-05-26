@@ -20,6 +20,7 @@ export class EventoService {
     async findAll(): Promise<Evento[]> {
         return await this.model.find({}).exec();
     }
+    
     async query(model: QueryCommand): Promise<Evento[]> {
         return await this.model
             .find(model.query,
