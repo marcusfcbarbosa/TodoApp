@@ -6,7 +6,6 @@ import { CreateEventoCommand } from '../commands/create-evento.command';
 import { EventoService } from '../services/evento.service';
 import { Evento } from '../models/evento.model';
 
-
 @Controller('v1/Eventos')
 export class EventoController {
 
@@ -32,5 +31,4 @@ export class EventoController {
             throw new HttpException(new Result('Erro ao processar requisição', false, null, error), HttpStatus.BAD_REQUEST);
         }
     }
-
 }

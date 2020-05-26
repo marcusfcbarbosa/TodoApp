@@ -2,3 +2,21 @@ C:/Users/dev/TodoApp
 
 1- Baixando versao atual do nodejs e npm
 	https://nodejs.org/en/
+=====================================
+2- https://angular.io
+npm install -g @angular/cli --> feito isso, tem disponível o comando ng
+
+ng --version
+=====================================
+3- Criando uma aplicação , com transpilador, testes...todo ambiente configurado
+	npm install -g @nestjs/cli@5.7.1  ===> para ter acesso ao nodemon.json
+	ng new App
+=====================================
+4- Criando a api em nest
+	nest new Api
+=====================================
+5- RODAR A APLICAÇÃO ANGULAR entrando na aplicação angular
+	ng serve -o já abre a tela
+=====================================
+
+	
