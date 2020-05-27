@@ -75,7 +75,36 @@ export class EventosComponent implements OnInit {
 	
 	@import '../node_modules/bootstrap//dist/css/bootstrap.min.css';
 	@import '../node_modules/@fortawesome/fontawesome-free/css/all.min.css';
-=====================================	
+==========================================
+9- Embutindo barra de navegação
+	https://getbootstrap.com/docs/4.5/components/navbar/
+==========================================
+10- Two way Data Binding
 
+Devemos implementar o FormsModule
+
+dentro do app.module
+
+import { FormsModule } from '@angular/forms';
+
+imports: [
+      BrowserModule,
+      AppRoutingModule,
+      HttpClientModule,
+      FormsModule   < ==========
+   ],
+
+Para usarmos como um filtro de grid
+Obs: não funciona dentro de form, somente dentro de div
+<div class="form-inline">
+  <div class="form-group mb-2"
+  ><input type="text" class="form-control mr-2" 
+  placeholder="Buscar"
+  [(ngModel)]="filtroLista">
+
+  <button class="btn btn-outline-success">Buscar</button>
+  </div>
+</div>
+	
 	
 	
