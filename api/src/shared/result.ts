@@ -1,10 +1,8 @@
-export class Result{
-    
+export class Result {
     constructor(
-        public message:string,
+        public message: string,
         public success: boolean,
-        public data:any,
-        public error:any
-    ) {
+        public data: any,
+        public error: any) {
     }
 }
