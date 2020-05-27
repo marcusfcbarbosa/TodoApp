@@ -1,13 +1,21 @@
-<form class="form-inline">
+<div class="form-inline">
   <div class="form-group mb-2"
-  ><input type="text" class="form-control mr-2" placeholder="Buscar">
+  ><input type="text" class="form-control mr-2" 
+  placeholder="Buscar"
+  [(ngModel)]="filtroLista">
+
   <button class="btn btn-outline-success">Buscar</button>
   </div>
-</form>
+</div>
+<h3>Filtro {{filtroLista}}</h3>
 <table class="table table-striped">
-  <thead class="thead-dark">
+  <thead class="thead-light">
     <tr>
-      <th>#</th>
+      <th>
+        <button (click)="alternarImagem()" class="btn btn-outline-primary">
+          Mostrar Imagem
+        </button>
+      </th>
       <th>Tema</th>
       <th>Local</th>
       <th>Data</th>
@@ -16,27 +24,26 @@
       <th>Opções</th>
     </tr>
   </thead>
-  <tbody>
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
+  <tbody *ngIf="eventos && eventos.length">
+    <tr *ngFor="let item of eventos">
+      <td >
+        <img *ngIf="mostrarImagem" src="{{ item.imagem }}"
+        [style.width.px]="imagemLargura"
+        [style.margin.px]="imagemMargem">
+         </td>
+      <td> {{ item.tema | uppercase }} </td>
+      <td> {{ item.local | uppercase }} </td>
+      <td> {{ item.created_at }} </td>
+      <td> {{ item.quantidadePessoas }} </td>
+      <td> {{ item.lote | uppercase }} </td>
       <td></td>
     </tr>
   </tbody>
+  <tfoot *ngIf="!eventos.length">
+    <tr>
+      <td colspan="7" class="text-center">
+        <h4> Nenhum elemento encontrado</h4>
+      </td>
+    </tr>
+  </tfoot>
 </table>
-
-<!-- 
-<div  *ngFor="let item of eventos">
-  Tema  : {{ item.tema }}
-  <br>
-  Local : {{ item.local }}
-  <br>
-  Quantidade de Pessoas: {{ item.quantidadePessoas }}
-  <br>
-  Lote : {{ item.lote }}
-  <hr>
-</div> -->

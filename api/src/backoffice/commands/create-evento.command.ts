@@ -1,7 +1,5 @@
 'use strict';
-
 import { ApiProperty } from '@nestjs/swagger';
-
 export class CreateEventoCommand {
 
     @ApiProperty()
@@ -15,6 +13,9 @@ export class CreateEventoCommand {
 
     @ApiProperty()
     public readonly lote: string;
+
+    @ApiProperty()
+    public readonly image: string;
 
     @ApiProperty()
     public active: boolean;

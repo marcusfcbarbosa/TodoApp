@@ -1,4 +1,4 @@
-import { Controller, Post, Body, HttpException, HttpStatus, UseInterceptors, Get } from '@nestjs/common';
+import { Controller, Post, Body, HttpException, HttpStatus, UseInterceptors, Get, UploadedFile, FileInterceptor } from '@nestjs/common';
 import { Result } from 'src/shared/result';
 import { CreateEventoContract } from '../contracts/create-evento.contract';
 import { ValidatorInterceptor } from 'src/shared/interceptors/validator.interceptor';
@@ -19,6 +19,7 @@ export class EventoController {
                 command.local
                 , command.quantidadePessoas
                 , command.lote
+                , command.image
                 , command.active));
             return new Result('Inserido com sucesso', true, evento, null);
         } catch (error) {
@@ -34,5 +35,11 @@ export class EventoController {
         } catch (error) {
             throw new HttpException(new Result('Erro ao processar requisição', false, null, error), HttpStatus.BAD_REQUEST);
         }
+    }
+
+    @Post('upload')
+    @UseInterceptors(FileInterceptor('file'))
+    uploadFile(@UploadedFile() file) {
+        console.log(file);
     }
 }

@@ -21,6 +21,10 @@ export const EventoSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    image: {
+        type: String,
+        required: false,
+    },
     active: {
         type: Boolean,
         required: true,
