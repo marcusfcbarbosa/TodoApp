@@ -13,6 +13,14 @@ export const EventoSchema = new mongoose.Schema({
         required: true,
         trim: true,
     },
+    quantidadePessoas: {
+        type: Number,
+        required: true,
+    },
+    lote: {
+        type: String,
+        required: true,
+    },
     active: {
         type: Boolean,
         required: true,

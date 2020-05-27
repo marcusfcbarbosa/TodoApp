@@ -11,5 +11,11 @@ export class CreateEventoCommand {
     public readonly local: string;
 
     @ApiProperty()
+    public readonly quantidadePessoas: number;
+
+    @ApiProperty()
+    public readonly lote: string;
+
+    @ApiProperty()
     public active: boolean;
 }

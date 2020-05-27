@@ -15,7 +15,11 @@ export class EventoController {
     @UseInterceptors(new ValidatorInterceptor(new CreateEventoContract()))
     async post(@Body() command: CreateEventoCommand) {
         try {
-            let evento = await this.eventoService.create(new Evento(command.tema, command.local, command.active));
+            let evento = await this.eventoService.create(new Evento(command.tema,
+                command.local
+                , command.quantidadePessoas
+                , command.lote
+                , command.active));
             return new Result('Inserido com sucesso', true, evento, null);
         } catch (error) {
             throw new HttpException(new Result('Erro ao processar requisição', false, null, error), HttpStatus.BAD_REQUEST);

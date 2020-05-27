@@ -3,6 +3,8 @@ export class Evento {
     constructor(
         public tema: string,
         public local: string,
-        public active: Boolean) {
+        public quantidadePessoas: number,
+        public lote: string,
+        public active: boolean) {
     }
 }
