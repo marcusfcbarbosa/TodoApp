@@ -51,7 +51,6 @@ export class EventosComponent implements OnInit {
       }
     );
   }
-
 =====================================
 7- Habilitar o CORS no nest
 	https://docs.nestjs.com/techniques/security#cors
@@ -106,6 +105,7 @@ Obs: não funciona dentro de form, somente dentro de div
   </div>
 </div>
 ==========================================
+
 	
 	
 	

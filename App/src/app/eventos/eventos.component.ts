@@ -7,9 +7,7 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./eventos.component.css']
 })
 export class EventosComponent implements OnInit {
-
   public title = 'Eventos';
-
   eventos: any = [];
   imagemLargura = 50;
   imagemMargem = 2;
@@ -34,8 +32,6 @@ export class EventosComponent implements OnInit {
     return this.eventos.filter(
       evento => evento.tema.toLocaleLowerCase().indexOf(filtrarPor) !== -1);
   }
-
-
   getEventos() {
     this.eventos = this.http.get("http://localhost:3000/v1/Eventos").subscribe(
       response => {
