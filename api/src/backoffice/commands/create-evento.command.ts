@@ -20,3 +20,4 @@ export class CreateEventoCommand {
     @ApiProperty()
     public active: boolean;
 }
+

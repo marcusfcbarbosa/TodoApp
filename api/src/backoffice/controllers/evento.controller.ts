@@ -21,7 +21,7 @@ export class EventoController {
                 , command.lote
                 , command.image
                 , command.active));
-            return new Result('Inserido com sucesso', true, evento, null);
+            return evento;
         } catch (error) {
             throw new HttpException(new Result('Erro ao processar requisição', false, null, error), HttpStatus.BAD_REQUEST);
         }
@@ -30,8 +30,8 @@ export class EventoController {
     @Get('')
     async get() {
         try {
-            const customers = await this.eventoService.findAll();
-            return new Result('', true, customers, null);
+            const eventos = await this.eventoService.findAll();
+            return eventos;
         } catch (error) {
             throw new HttpException(new Result('Erro ao processar requisição', false, null, error), HttpStatus.BAD_REQUEST);
         }

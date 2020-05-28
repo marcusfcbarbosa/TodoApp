@@ -7,7 +7,6 @@
   <button class="btn btn-outline-success">Buscar</button>
   </div>
 </div>
-<h3>Filtro {{filtroLista}}</h3>
 <table class="table table-striped">
   <thead class="thead-light">
     <tr>
@@ -25,7 +24,7 @@
     </tr>
   </thead>
   <tbody *ngIf="eventos && eventos.length">
-    <tr *ngFor="let item of eventos">
+    <tr *ngFor="let item of eventosFiltrados">
       <td >
         <img *ngIf="mostrarImagem" src="{{ item.imagem }}"
         [style.width.px]="imagemLargura"

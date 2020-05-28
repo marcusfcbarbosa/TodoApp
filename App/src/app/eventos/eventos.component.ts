@@ -9,21 +9,38 @@ import { HttpClient } from '@angular/common/http';
 export class EventosComponent implements OnInit {
 
   public title = 'Eventos';
+
   eventos: any = [];
   imagemLargura = 50;
   imagemMargem = 2;
   mostrarImagem = false;
-  filtroLista = '';
+  _filtroLista: string;
+  get filtroLista(): string {
+    return this._filtroLista;
+  }
+  set filtroLista(value: string) {
+    this._filtroLista = value;
+    this.eventosFiltrados = this.filtroLista ? this.filtrarEventos(this.filtroLista) : this.eventos;
+  }
+  eventosFiltrados: any = [];
   constructor(private http: HttpClient) { }
 
   alternarImagem() {
     this.mostrarImagem = !this.mostrarImagem;
   }
 
+  filtrarEventos(filtrarPor: string): any {
+    filtrarPor = filtrarPor.toLocaleLowerCase();
+    return this.eventos.filter(
+      evento => evento.tema.toLocaleLowerCase().indexOf(filtrarPor) !== -1);
+  }
+
+
   getEventos() {
     this.eventos = this.http.get("http://localhost:3000/v1/Eventos").subscribe(
       response => {
-        this.eventos = response.data;
+        this.eventos = response;
+        this.eventosFiltrados = this.eventos;
       }
       , error => {
         console.log(error);
