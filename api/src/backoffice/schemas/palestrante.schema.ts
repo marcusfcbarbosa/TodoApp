@@ -1,6 +1,5 @@
 import * as mongoose from 'mongoose';
 export const PalestranteSchema = new mongoose.Schema({
-
     documento: {
         type: String,
         required: true,

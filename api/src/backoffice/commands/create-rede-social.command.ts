@@ -1,11 +1,13 @@
 'use strict';
 import { ApiProperty } from '@nestjs/swagger';
-export class UpdateEventoCommand {
-    constructor() {}
+export class CreateRedeSocialCommand {
+
     @ApiProperty()
-    public readonly tema: string;
+    public readonly nome: string;
+
     @ApiProperty()
-    public readonly local: string;
+    public readonly url: string;
+
     @ApiProperty()
     public readonly active: boolean;
 }

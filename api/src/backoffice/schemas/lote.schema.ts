@@ -11,10 +11,12 @@ export const LoteSchema = new mongoose.Schema({
     datainicio: {
         type: Date,
         required: true,
+        default: Date.now,
     },
     datafim: {
         type: Date,
         required: true,
+        default: Date.now,
     },
     quantidade: {
         type: Number,

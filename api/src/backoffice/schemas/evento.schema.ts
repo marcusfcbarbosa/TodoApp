@@ -25,6 +25,24 @@ export const EventoSchema = new mongoose.Schema({
         type: String,
         required: false,
     },
+    palestrantes: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Palestrante',
+        },
+    ],
+    redeSociais: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'RedeSocial',
+        },
+    ],
+    lotes: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Lote',
+        },
+    ],
     active: {
         type: Boolean,
         required: true,

@@ -1,7 +1,7 @@
 'use strict';
 import { Injectable } from '@nestjs/common';
-import { IContract } from 'src/shared/icontract';
-import { Flunt } from 'src/utils/flunt';
+import { IContract } from '../../shared/icontract';
+import { Flunt } from '../../shared/utils/flunt';
 import { CreateEventoCommand } from '../commands/create-evento.command';
 
 @Injectable()

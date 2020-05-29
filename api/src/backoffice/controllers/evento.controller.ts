@@ -1,7 +1,7 @@
 import { Controller, Post, Body, HttpException, HttpStatus, UseInterceptors, Get, UploadedFile, FileInterceptor } from '@nestjs/common';
-import { Result } from 'src/shared/result';
+import { Result } from '../../shared/result';
 import { CreateEventoContract } from '../contracts/create-evento.contract';
-import { ValidatorInterceptor } from 'src/shared/interceptors/validator.interceptor';
+import { ValidatorInterceptor } from '../../shared/interceptors/validator.interceptor';
 import { CreateEventoCommand } from '../commands/create-evento.command';
 import { EventoService } from '../services/evento.service';
 import { Evento } from '../models/evento.model';
@@ -20,6 +20,9 @@ export class EventoController {
                 , command.quantidadePessoas
                 , command.lote
                 , command.image
+                , []
+                , []
+                , []
                 , command.active));
             return evento;
         } catch (error) {

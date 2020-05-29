@@ -18,6 +18,5 @@ export class CreateEventoCommand {
     public readonly image: string;
 
     @ApiProperty()
-    public active: boolean;
+    public readonly active: boolean;
 }
-
