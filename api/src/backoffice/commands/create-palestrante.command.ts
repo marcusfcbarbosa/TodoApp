@@ -15,5 +15,5 @@ export class CreatePalestranteCommand {
     public readonly email: string;
 
     @ApiProperty()
-    public active: boolean;
+    public readonly active: boolean;
 }

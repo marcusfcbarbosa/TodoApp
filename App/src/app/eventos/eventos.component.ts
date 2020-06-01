@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { EventoService } from '../_services/evento.service';
+
 
 @Component({
   selector: 'app-eventos',
@@ -21,7 +22,7 @@ export class EventosComponent implements OnInit {
     this.eventosFiltrados = this.filtroLista ? this.filtrarEventos(this.filtroLista) : this.eventos;
   }
   eventosFiltrados: any = [];
-  constructor(private http: HttpClient) { }
+  constructor(private eventoService: EventoService) { }
 
   alternarImagem() {
     this.mostrarImagem = !this.mostrarImagem;
@@ -33,7 +34,8 @@ export class EventosComponent implements OnInit {
       evento => evento.tema.toLocaleLowerCase().indexOf(filtrarPor) !== -1);
   }
   getEventos() {
-    this.eventos = this.http.get("http://localhost:3000/v1/Eventos").subscribe(
+    this.eventos = this.eventoService.getEventos()
+    .subscribe(
       response => {
         this.eventos = response;
         this.eventosFiltrados = this.eventos;

@@ -9,7 +9,7 @@ export class CreateRedeSocialContract implements IContract {
     errors: any[];
     validate(command: CreateRedeSocialCommand ): boolean {
         const flunt = new Flunt();
-        flunt.hasMinLen(command.nome, 3, 'Nome necessita de pelo menos 3 caracteres');
+        flunt.isRequired(command.nome,'Nome é necessário.');
         flunt.isRequired(command.url, 'Informe a url da rede social');
         this.errors = flunt.errors;
         return flunt.isValid();
