@@ -105,7 +105,25 @@ Obs: não funciona dentro de form, somente dentro de div
   </div>
 </div>
 ==========================================
+11- pasta 6 Organizando o Projeto
 
+Evento ====> n Palestrante
+Palestrante ====> n Evento
+
+Evento ====> n RedeSociais
+Evento ====> n Lotes
+==========================================
+12- Instalando NGX Bootstrap
+
+https://valor-software.com/ngx-bootstrap/#/documentation#getting-started
+
+<!-- index.html -->
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+npm install ngx-bootstrap --save
+
+
+Bom para Modal, e outros componentes estilizados de tela ETC
 	
 	
-	
+	5. Usando FormBuilder Service

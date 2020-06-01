@@ -6,9 +6,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./nav.component.css']
 })
 export class NavComponent implements OnInit {
-
+  userName:string = 'Demo';
   constructor() { }
 
+  entrar(){}
+
+  logout(){}
+
+  loggedIn(){
+
+  }
   ngOnInit() {
   }
 

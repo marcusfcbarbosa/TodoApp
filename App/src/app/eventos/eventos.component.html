@@ -1,12 +1,11 @@
 <div class="form-inline">
-  <div class="form-group mb-2"
-  ><input type="text" class="form-control mr-2" 
-  placeholder="Buscar"
-  [(ngModel)]="filtroLista">
+  <div class="form-group mb-2"><input type="text" class="form-control mr-2" placeholder="Buscar"
+      [(ngModel)]="filtroLista">
 
-  <button class="btn btn-outline-success">Buscar</button>
+    <button class="btn btn-outline-success">Buscar</button>
   </div>
 </div>
+
 <table class="table table-striped">
   <thead class="thead-light">
     <tr>
@@ -20,22 +19,33 @@
       <th>Data</th>
       <th>Qtd Pessoas</th>
       <th>Lote</th>
-      <th>Opções</th>
+      <th>
+        Ações
+      </th>
     </tr>
   </thead>
   <tbody *ngIf="eventos && eventos.length">
     <tr *ngFor="let item of eventosFiltrados">
-      <td >
-        <img *ngIf="mostrarImagem" src="{{ item.imagem }}"
-        [style.width.px]="imagemLargura"
-        [style.margin.px]="imagemMargem">
-         </td>
+      <td>
+        <img *ngIf="mostrarImagem" src="{{ item.imagem }}" [style.width.px]="imagemLargura"
+          [style.margin.px]="imagemMargem">
+      </td>
       <td> {{ item.tema | uppercase }} </td>
       <td> {{ item.local | uppercase }} </td>
-      <td> {{ item.created_at }} </td>
+      <td> {{ item.created_at | DateTimeFormatePipe }} </td>
       <td> {{ item.quantidadePessoas }} </td>
       <td> {{ item.lote | uppercase }} </td>
-      <td></td>
+      <td>
+        <div class="btn-group">
+          <button class="btn btn-sm btn-primary" tooltip="Editar" (click)="openModal(templateModal)">
+            <i class="fa fa-edit"></i>
+          </button>
+          <button class="btn btn-sm btn-danger" tooltip="Excluir">
+            <i class="fa fa-eraser"></i>
+          </button>
+        </div>
+
+      </td>
     </tr>
   </tbody>
   <tfoot *ngIf="!eventos.length">
@@ -46,3 +56,76 @@
     </tr>
   </tfoot>
 </table>
+
+<ng-template #templateModal>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Modal</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="registerForm">
+      <div class="form-row">
+        <label for="lblTema">Tema</label>
+        <input type="text" class="form-control"
+          [ngClass]="{'is-invalid': registerForm.get('tema').errors && registerForm.get('tema').touched}"
+          formControlName="tema">
+        <div *ngIf="registerForm.get('tema').hasError('required') && registerForm.get('tema').touched "
+          class="invalid-feedback">
+          Tema é obrigatorio
+        </div>
+        <div *ngIf="registerForm.get('tema').hasError('minLength') && registerForm.get('tema').touched "
+          class="invalid-feedback">
+          Minimo 4 caracteres
+        </div>
+        <div *ngIf="registerForm.get('tema').hasError('maxLength') && registerForm.get('tema').touched "
+          class="invalid-feedback">
+          Maximo 50 caracteres
+        </div>
+        <label for="lblLocal">Local</label>
+        <input type="text" class="form-control"
+          [ngClass]="{'is-invalid': registerForm.get('local').errors && registerForm.get('local').touched}"
+          formControlName="local">
+        <div class="invalid-feedback">
+          Local é obrigatorio
+        </div>
+        <label for="lblData">Data</label>
+        <input type="date" class="form-control"
+          [ngClass]="{'is-invalid': registerForm.get('dataInicio').errors && registerForm.get('dataInicio').touched}"
+          formControlName="dataInicio">
+        <div class="invalid-feedback">
+          Data é obrigatorio
+        </div>
+        <label for="lblData">Quantidade de Pessoas</label>
+        <input type="text" class="form-control"
+          [ngClass]="{'is-invalid': registerForm.get('quantidadePessoas').errors && registerForm.get('quantidadePessoas').touched}"
+          formControlName="quantidadePessoas">
+        <div class="invalid-feedback">
+          Quantidade de Pessoas é obrigatorio
+        </div>
+
+        <label for="lblData">Telefone</label>
+        <input type="text" class="form-control"
+          [ngClass]="{'is-invalid': registerForm.get('telefone').errors && registerForm.get('telefone').touched}"
+          formControlName="telefone">
+        <div class="invalid-feedback">
+          Telefone é obrigatorio
+        </div>
+
+        <label for="lblData">E-mail</label>
+        <input type="email" class="form-control"
+          [ngClass]="{'is-invalid': registerForm.get('email').errors && registerForm.get('email').touched}"
+          formControlName="email">
+        <div *ngIf="registerForm.get('email').hasError('email')  && registerForm.get('email').touched "
+          class="invalid-feedback">
+          E-mail inválido
+        </div>
+      </div>
+      <div class="form-row">
+        <button type="submit" class="btn btn-primary" (click)="salvarAlteracao()">Submit</button>
+      </div>
+
+    </form>
+  </div>
+</ng-template>

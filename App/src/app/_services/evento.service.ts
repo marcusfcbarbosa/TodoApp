@@ -2,14 +2,15 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Evento } from '../models/Evento';
+import { Constantes } from '../utils/Constantes';
 
 @Injectable({
     providedIn: 'root'
 })
 
 export class EventoService {
-
-    baseUrl = 'http://localhost:3000/v1/Eventos';
+    
+    baseUrl = Constantes.END_POINT_API;
 
     constructor(private http: HttpClient) { }
 
