@@ -1,4 +1,4 @@
-import { Controller, Post, Body, HttpException, HttpStatus, UseInterceptors, Get, UploadedFile, FileInterceptor } from '@nestjs/common';
+import { Controller, Post, Body, HttpException, HttpStatus, UseInterceptors, Get, UploadedFile, FileInterceptor, Param } from '@nestjs/common';
 import { Result } from '../../shared/result';
 import { CreateEventoContract } from '../contracts/create-evento.contract';
 import { ValidatorInterceptor } from '../../shared/interceptors/validator.interceptor';
@@ -39,6 +39,31 @@ export class EventoController {
             throw new HttpException(new Result('Erro ao processar requisição', false, null, error), HttpStatus.BAD_REQUEST);
         }
     }
+
+
+    @Get(':id')
+    async getById(@Param('id') id: string) {
+        try {
+            const eventos = await this.eventoService.findById(id);
+            return eventos;
+        } catch (error) {
+            throw new HttpException(new Result('Erro ao processar requisição', false, null, error), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @Get('getByTema/:tema')
+    async getByTema(@Param('tema') tema: string) {
+        try {
+            const eventos = await this.eventoService.findByTema(tema);
+            return eventos;
+        } catch (error) {
+            throw new HttpException(new Result('Erro ao processar requisição', false, null, error), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+
+
+
 
     @Post('upload')
     @UseInterceptors(FileInterceptor('file'))

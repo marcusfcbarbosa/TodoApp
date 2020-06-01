@@ -8,12 +8,20 @@ import { Evento } from '../models/Evento';
 })
 
 export class EventoService {
-    
+
     baseUrl = 'http://localhost:3000/v1/Eventos';
 
     constructor(private http: HttpClient) { }
 
     getEventos(): Observable<Evento[]> {
         return this.http.get<Evento[]>(this.baseUrl);
+    }
+
+    getEventoById(id: string): Observable<Evento> {
+        return this.http.get<Evento>(`${this.baseUrl}/${id}`);
+    }
+
+    getEventoByTema(tema: string): Observable<Evento> {
+        return this.http.get<Evento>(`${this.baseUrl}/getByTema/${tema}`);
     }
 }

@@ -12,6 +12,15 @@ export class EventoService {
         const user = new this.model(data);
         return await user.save();
     }
+
+    async findById(id: string): Promise<Evento[]> {
+        return await this.model.find({ _id: id }).exec();
+    }
+    async findByTema(tema: string): Promise<Evento[]> {
+        return await this.model.find({ tema: tema }).exec();
+    }
+
+
     async findAll(): Promise<Evento[]> {
         return await this.model.find({}).exec();
     }
