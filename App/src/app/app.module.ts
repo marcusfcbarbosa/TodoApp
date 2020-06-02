@@ -14,6 +14,8 @@ import { DateTimeFormatePipePipe } from './_helps/DatetimeFormatPipe.pipe';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+
 
 
 @NgModule({
@@ -26,7 +28,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
    ],
    imports: [
       BrowserModule,
-
+      BsDatepickerModule.forRoot(),
       BsDropdownModule.forRoot(),
       TooltipModule.forRoot(),
       ModalModule.forRoot(),

@@ -15,6 +15,7 @@ export class EventoController {
     @UseInterceptors(new ValidatorInterceptor(new CreateEventoContract()))
     async post(@Body() command: CreateEventoCommand) {
         try {
+            console.log(command);
             let evento = await this.eventoService.create(new Evento(command.tema,
                 command.local
                 , command.quantidadePessoas
@@ -60,9 +61,6 @@ export class EventoController {
             throw new HttpException(new Result('Erro ao processar requisição', false, null, error), HttpStatus.BAD_REQUEST);
         }
     }
-
-
-
 
 
     @Post('upload')

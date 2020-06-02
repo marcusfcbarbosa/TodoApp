@@ -45,7 +45,6 @@ export const EventoSchema = new mongoose.Schema({
     ],
     active: {
         type: Boolean,
-        required: true,
         default: true,
     },
 }, { timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' } });

@@ -9,7 +9,7 @@ export class CreatePalestranteContract implements IContract {
     errors: any[];
     validate(command: CreatePalestranteCommand): boolean {
         const flunt = new Flunt();
-        flunt.hasMinLen(command.documento, 11, 'Documento necessita de pelo menos 11 caracteres');
+        flunt.isCpf(command.documento, 'Documento inválido.');
         flunt.hasMinLen(command.nome, 3, 'Nome necessita de pelo menos 3 caracteres');
         flunt.isEmail(command.email, 'E-mail inválido');
         flunt.hasMinLen(command.telefone, 11, 'Telefone com DDD precisa de 11 caracteres');
