@@ -30,7 +30,6 @@ export class EventoService {
         return this.http.delete(`${this.baseUrl}/${evento._id}`);
     }
 
-
     getEventoById(id: string): Observable<Evento> {
         return this.http.get<Evento>(`${this.baseUrl}/${id}`);
     }

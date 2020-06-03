@@ -10,6 +10,9 @@ import { ptBrLocale } from 'ngx-bootstrap/locale';
 import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 defineLocale('pt-br', ptBrLocale);
 
+//ngx-toastr
+import { ToastrService } from 'ngx-toastr';
+
 @Component({
   selector: 'app-eventos',
   templateUrl: './eventos.component.html',
@@ -33,7 +36,8 @@ export class EventosComponent implements OnInit {
     private eventoService: EventoService
     , private modlService: BsModalService
     , private fb: FormBuilder
-    , private localeService: BsLocaleService) {
+    , private localeService: BsLocaleService
+    , private toastr: ToastrService) {
 
     //definir o datePicker como formato pt-br
     this.localeService.use('pt-br');
@@ -49,6 +53,14 @@ export class EventosComponent implements OnInit {
 
   fecharModal(template: any) {
     template.hide();
+  }
+
+  showSuccess(message: string) {
+    this.toastr.success('Suceso!', message);
+  }
+
+  showError(message: string) {
+    this.toastr.error('Erro!', message);
   }
 
   validation() {
@@ -69,13 +81,14 @@ export class EventosComponent implements OnInit {
     this.eventoService.deleteEvento(this.evento)
       .subscribe(
         () => {
+          this.showSuccess('Deletado');
           this.getEventos();
         }, error => {
           console.error(error);
         }
       );
   }
-
+  
   editar(evento: Evento, template: any) {
     this.modoSalvar = 'put';
     this.openModal(template);
@@ -95,43 +108,46 @@ export class EventosComponent implements OnInit {
 
   salvarAlteracao(template: any) {
     if (this.registerForm.valid) {
-      this.evento = Object.assign({ _id: this.evento._id }, this.registerForm.value);
+
       if (this.modoSalvar == 'post') {
+        this.evento = Object.assign({}, this.registerForm.value);
         this.eventoService.postEvento(this.evento)
           .subscribe(
             (novoEvento: Evento) => {
               template.hide();
+              this.showSuccess('Salvo');
               this.getEventos();
             }, error => {
               console.error(error);
+              this.showError('Erro');
             }
           );
       }
       if (this.modoSalvar == 'put') {
+        this.evento = Object.assign({ _id: this.evento._id }, this.registerForm.value);
         this.eventoService.putEvento(this.evento)
           .subscribe(
             (novoEvento: Evento) => {
               template.hide();
+              this.showSuccess('Editado');
               this.getEventos();
             }, error => {
               console.error(error);
+              this.showError('Erro');
             }
           );
       }
     }
   }
 
-
   alternarImagem() {
     this.mostrarImagem = !this.mostrarImagem;
   }
-
   filtrarEventos(filtrarPor: string): any {
     filtrarPor = filtrarPor.toLocaleLowerCase();
     return this.eventos.filter(
       evento => evento.tema.toLocaleLowerCase().indexOf(filtrarPor) !== -1);
   }
-
   getEventos() {
     this.eventoService.getEventos()
       .subscribe(

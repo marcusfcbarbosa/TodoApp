@@ -32,7 +32,7 @@
       </th>
     </tr>
   </thead>
-  <tbody *ngIf="eventos && eventos.length">
+  <tbody *ngIf="eventos">
     <tr *ngFor="let evento of eventosFiltrados">
       <td>
         <img *ngIf="mostrarImagem" src="{{ evento.imagem }}" [style.width.px]="imagemLargura"
@@ -57,7 +57,7 @@
       </td>
     </tr>
   </tbody>
-  <tfoot *ngIf="!eventos.length">
+  <tfoot *ngIf="!eventos">
     <tr>
       <td colspan="7" class="text-center">
         <h4> Nenhum elemento encontrado</h4>
@@ -94,7 +94,6 @@
               class="invalid-feedback">
               Maximo 50 caracteres
             </div>
-
             <label for="lblLocal">Local</label>
             <input type="text" class="form-control"
               [ngClass]="{'is-invalid': registerForm.get('local').errors && registerForm.get('local').touched}"
@@ -102,16 +101,13 @@
             <div class="invalid-feedback">
               Local é obrigatorio
             </div>
-
             <label for="lblData">Data</label>
-
             <input type="date"
               [ngClass]="{'is-invalid': registerForm.get('dataInicio').errors && registerForm.get('dataInicio').touched}"
               formControlName="dataInicio" placeholder="Daterangepicker" class="form-control">
             <div class="invalid-feedback">
               Data é obrigatorio
             </div>
-
             <label for="lblData">Quantidade de Pessoas</label>
             <input type="text" class="form-control"
               [ngClass]="{'is-invalid': registerForm.get('quantidadePessoas').errors && registerForm.get('quantidadePessoas').touched}"
@@ -119,7 +115,6 @@
             <div class="invalid-feedback">
               Quantidade de Pessoas é obrigatorio
             </div>
-
             <label for="lblData">Telefone</label>
             <input type="text" class="form-control"
               [ngClass]="{'is-invalid': registerForm.get('telefone').errors && registerForm.get('telefone').touched}"
@@ -127,7 +122,6 @@
             <div class="invalid-feedback">
               Telefone é obrigatorio
             </div>
-
             <label for="lblData">E-mail</label>
             <input type="email" class="form-control"
               [ngClass]="{'is-invalid': registerForm.get('email').errors && registerForm.get('email').touched}"
@@ -136,13 +130,10 @@
               class="invalid-feedback">
               E-mail inválido
             </div>
-
             <label for="lblData">Lote</label>
             <input type="text" class="form-control"
               [ngClass]="{'is-invalid': registerForm.get('lote').errors && registerForm.get('lote').touched}"
               formControlName="lote">
-
-
           </div>
           <div class="modal-footer d-flex">
             <button type="button" class="btn btn-secondary" (click)="fecharModal(lgModal)">Fechar</button>

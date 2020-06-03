@@ -8,6 +8,7 @@ import { QueryCommand } from '../commands/query.command';
 export class EventoService {
     constructor(@InjectModel('Evento') private readonly model: Model<Evento>) {
     }
+    
     async create(data: Evento): Promise<Evento> {
         const user = new this.model(data);
         return await user.save();
@@ -20,6 +21,7 @@ export class EventoService {
     async findById(id: string): Promise<Evento[]> {
         return await this.model.find({ _id: id }).exec();
     }
+
     async findByTema(tema: string): Promise<Evento[]> {
         return await this.model.find({ tema: tema }).exec();
     }
@@ -31,6 +33,7 @@ export class EventoService {
     async findAll(): Promise<Evento[]> {
         return await this.model.find({}).exec();
     }
+
     async query(model: QueryCommand): Promise<Evento[]> {
         return await this.model
             .find(model.query,

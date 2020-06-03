@@ -1,22 +1,27 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { HttpClientModule } from '@angular/common/http';
+//Formulario
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+//Rotas
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { EventosComponent } from './eventos/eventos.component';
-import { NavComponent } from './nav/nav.component';
-import { DateTimeFormatePipePipe } from './_helps/DatetimeFormatPipe.pipe';
-
 //BGX-BOOTSTRAP
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
-
-
+//ngx-toastr
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
+//componentes
+import { AppComponent } from './app.component';
+import { EventosComponent } from './eventos/eventos.component';
+import { NavComponent } from './nav/nav.component';
+import { PalestrantesComponent } from './palestrantes/palestrantes.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { ContatosComponent } from './contatos/contatos.component';
+//Pipe
+import { DateTimeFormatePipePipe } from './_helps/DatetimeFormatPipe.pipe';
 
 @NgModule({
    declarations: [
@@ -24,7 +29,10 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
       EventosComponent,
       EventosComponent,
       NavComponent,
-      DateTimeFormatePipePipe
+      DateTimeFormatePipePipe,
+      PalestrantesComponent,
+      DashboardComponent,
+      ContatosComponent
    ],
    imports: [
       BrowserModule,
@@ -32,6 +40,8 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
       BsDropdownModule.forRoot(),
       TooltipModule.forRoot(),
       ModalModule.forRoot(),
+      BrowserAnimationsModule,
+      ToastrModule.forRoot(),
 
       AppRoutingModule,
       HttpClientModule,
