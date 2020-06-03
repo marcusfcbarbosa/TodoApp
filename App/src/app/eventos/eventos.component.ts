@@ -21,7 +21,7 @@ import { ToastrService } from 'ngx-toastr';
 
 
 export class EventosComponent implements OnInit {
-  public title = 'Eventos';
+  titulo = 'Eventos';
   eventos: Evento[];
   evento: Evento;
   imagemLargura = 50;
@@ -88,7 +88,7 @@ export class EventosComponent implements OnInit {
         }
       );
   }
-  
+
   editar(evento: Evento, template: any) {
     this.modoSalvar = 'put';
     this.openModal(template);
