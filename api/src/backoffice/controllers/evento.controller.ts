@@ -1,21 +1,21 @@
-import { Controller, Post, Body, HttpException, HttpStatus, UseInterceptors, Get, UploadedFile, FileInterceptor, Param } from '@nestjs/common';
+import { Controller, Post, Body, HttpException, HttpStatus, UseInterceptors, Get, UploadedFile, FileInterceptor, Param, Put } from '@nestjs/common';
 import { Result } from '../../shared/result';
 import { CreateEventoContract } from '../contracts/create-evento.contract';
 import { ValidatorInterceptor } from '../../shared/interceptors/validator.interceptor';
 import { CreateEventoCommand } from '../commands/create-evento.command';
 import { EventoService } from '../services/evento.service';
 import { Evento } from '../models/evento.model';
+import { UpdateEventoCommand } from '../commands/update-evento.command';
+import { UpdateEventoContract } from '../contracts/update-evento.contract';
 
 @Controller('v1/Eventos')
 export class EventoController {
 
     constructor(private readonly eventoService: EventoService) { }
-
     @Post()
     @UseInterceptors(new ValidatorInterceptor(new CreateEventoContract()))
     async post(@Body() command: CreateEventoCommand) {
         try {
-            console.log(command);
             let evento = await this.eventoService.create(new Evento(command.tema,
                 command.local
                 , command.quantidadePessoas
@@ -31,6 +31,27 @@ export class EventoController {
         }
     }
 
+    @Put(':id')
+    @UseInterceptors(new ValidatorInterceptor(new UpdateEventoContract()))
+    async put(@Param('id') id: string, @Body() command: UpdateEventoCommand) {
+        try {
+            let evento = await this.eventoService.update(id,new Evento(command.tema,
+                 command.local
+                , command.quantidadePessoas
+                , command.lote
+                , command.image
+                , []
+                , []
+                , []
+                , command.active ));
+            return evento;
+        } catch (error) {
+            throw new HttpException(new Result('Erro ao processar requisição', false, null, error), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+
+
     @Get('')
     async get() {
         try {
@@ -40,7 +61,6 @@ export class EventoController {
             throw new HttpException(new Result('Erro ao processar requisição', false, null, error), HttpStatus.BAD_REQUEST);
         }
     }
-
 
     @Get(':id')
     async getById(@Param('id') id: string) {

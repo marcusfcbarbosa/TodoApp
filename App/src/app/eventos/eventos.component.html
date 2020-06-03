@@ -6,7 +6,7 @@
     </div>
   </div>
   <div>
-    <button (click)="openModal(lgModal)" class="btn btn-outline-primary pull-right">
+    <button (click)="novo(lgModal)" class="btn btn-outline-primary pull-right">
       <i class="fa fa-plus-circle"></i>
       Novo Evento
     </button>
@@ -20,30 +20,36 @@
           Mostrar Imagem
         </button>
       </th>
+      <th>Id</th>
       <th>Tema</th>
       <th>Local</th>
       <th>Data</th>
       <th>Qtd Pessoas</th>
       <th>Lote</th>
+      <th>Telefone</th>
+      <th>Email</th>
       <th>
         Ações
       </th>
     </tr>
   </thead>
   <tbody *ngIf="eventos && eventos.length">
-    <tr *ngFor="let item of eventosFiltrados">
+    <tr *ngFor="let evento of eventosFiltrados">
       <td>
-        <img *ngIf="mostrarImagem" src="{{ item.imagem }}" [style.width.px]="imagemLargura"
+        <img *ngIf="mostrarImagem" src="{{ evento.imagem }}" [style.width.px]="imagemLargura"
           [style.margin.px]="imagemMargem">
       </td>
-      <td> {{ item.tema | uppercase }} </td>
-      <td> {{ item.local | uppercase }} </td>
-      <td> {{ item.created_at | DateTimeFormatePipe }} </td>
-      <td> {{ item.quantidadePessoas }} </td>
-      <td> {{ item.lote | uppercase }} </td>
+      <td> {{ evento._id }} </td>
+      <td> {{ evento.tema | uppercase }} </td>
+      <td> {{ evento.local | uppercase }} </td>
+      <td> {{ evento.created_at | DateTimeFormatePipe }} </td>
+      <td> {{ evento.quantidadePessoas }} </td>
+      <td> {{ evento.lote | uppercase }} </td>
+      <td> {{ evento.telefone | uppercase }} </td>
+      <td> {{ evento.email | uppercase }} </td>
       <td>
         <div class="btn-group">
-          <button class="btn btn-sm btn-primary" tooltip="Editar" (click)="openModal(lgModal)">
+          <button class="btn btn-sm btn-primary" tooltip="Editar" (click)="editar(evento,lgModal)">
             <i class="fa fa-edit"></i>
           </button>
           <button class="btn btn-sm btn-danger" tooltip="Excluir">

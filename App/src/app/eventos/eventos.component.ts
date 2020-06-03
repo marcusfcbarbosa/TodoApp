@@ -19,14 +19,14 @@ defineLocale('pt-br', ptBrLocale);
 
 export class EventosComponent implements OnInit {
   public title = 'Eventos';
-  eventos: any = [];
+  eventos: Evento[];
   evento: Evento;
   imagemLargura = 50;
   imagemMargem = 2;
   mostrarImagem = false;
+  modoSalvar = '';
   eventosFiltrados: any = [];
   _filtroLista: string;
-
   registerForm: FormGroup;
 
   constructor(
@@ -47,11 +47,6 @@ export class EventosComponent implements OnInit {
     this.eventosFiltrados = this.filtroLista ? this.filtrarEventos(this.filtroLista) : this.eventos;
   }
 
-
-  openModal(template: any) {
-    this.registerForm.reset();
-    template.show();
-  }
   fecharModal(template: any) {
     template.hide();
   }
@@ -59,7 +54,7 @@ export class EventosComponent implements OnInit {
   validation() {
     //validando com FormBuilder
     this.registerForm = this.fb.group({
-       tema: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(50)]]
+      tema: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(50)]]
       , local: ['', Validators.required]
       , lote: ['', Validators.required]
       , dataInicio: ['', Validators.required]
@@ -84,20 +79,52 @@ export class EventosComponent implements OnInit {
     // });
   }
 
+  editar(evento: Evento, template: any) {
+    this.modoSalvar = 'put';
+    console.log(this.modoSalvar);
+    this.openModal(template);
+    this.evento = evento;
+    this.registerForm.patchValue(evento);
+  }
+
+  novo(template: any) {
+    this.modoSalvar = 'post';
+    this.openModal(template);
+  }
+
+  openModal(template: any) {
+    this.registerForm.reset();
+    template.show();
+  }
+
   salvarAlteracao(template: any) {
     if (this.registerForm.valid) {
-      this.evento = Object.assign({}, this.registerForm.value);
-      this.eventoService.postEvento(this.evento)
-        .subscribe(
-          (novoEvento: Evento) => {
-            template.hide();
-            this.getEventos();
-          }, error => {
-            console.log(error);
-          }
-        );
+      this.evento = Object.assign({ _id: this.evento._id }, this.registerForm.value);
+      if (this.modoSalvar == 'post') {
+        this.eventoService.postEvento(this.evento)
+          .subscribe(
+            (novoEvento: Evento) => {
+              template.hide();
+              this.getEventos();
+            }, error => {
+              console.error(error);
+            }
+          );
+      }
+      if (this.modoSalvar == 'put') {
+        this.eventoService.putEvento(this.evento)
+          .subscribe(
+            (novoEvento: Evento) => {
+              template.hide();
+              this.getEventos();
+            }, error => {
+              console.error(error);
+            }
+          );
+      }
     }
   }
+
 
   alternarImagem() {
     this.mostrarImagem = !this.mostrarImagem;
@@ -110,7 +137,7 @@ export class EventosComponent implements OnInit {
   }
 
   getEventos() {
-    this.eventos = this.eventoService.getEventos()
+    this.eventoService.getEventos()
       .subscribe(
         (_eventos: Evento[]) => {
           this.eventos = _eventos;

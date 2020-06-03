@@ -20,6 +20,9 @@ export class EventoService {
         return await this.model.find({ tema: tema }).exec();
     }
 
+    async update(id: string, data: Evento): Promise<Evento> {
+        return await this.model.findOneAndUpdate({ _id: id }, data);
+    }
 
     async findAll(): Promise<Evento[]> {
         return await this.model.find({}).exec();

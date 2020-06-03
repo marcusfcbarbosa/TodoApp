@@ -3,6 +3,7 @@ import { RedeSocial } from "./rede-social";
 import { Lote } from "./lote";
 
 export interface Evento {
+    _id: string,
     tema: string,
     local: string,
     quantidadePessoas: number,
