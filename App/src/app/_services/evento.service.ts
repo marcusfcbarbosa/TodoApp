@@ -9,7 +9,7 @@ import { Constantes } from '../utils/Constantes';
 })
 
 export class EventoService {
-    
+
     baseUrl = Constantes.END_POINT_API;
 
     constructor(private http: HttpClient) { }
@@ -18,13 +18,16 @@ export class EventoService {
         return this.http.get<Evento[]>(this.baseUrl);
     }
 
-    postEvento(evento:Evento) {
-        return this.http.post(`${this.baseUrl}`,evento);
+    postEvento(evento: Evento) {
+        return this.http.post(`${this.baseUrl}`, evento);
     }
 
-    putEvento(evento:Evento) {
-        console.warn(evento._id);
-        return this.http.put(`${this.baseUrl}/${evento._id}`,evento);
+    putEvento(evento: Evento) {
+        return this.http.put(`${this.baseUrl}/${evento._id}`, evento);
+    }
+
+    deleteEvento(evento: Evento) {
+        return this.http.delete(`${this.baseUrl}/${evento._id}`);
     }
 
 

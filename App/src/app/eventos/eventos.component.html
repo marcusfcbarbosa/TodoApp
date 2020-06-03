@@ -20,7 +20,6 @@
           Mostrar Imagem
         </button>
       </th>
-      <th>Id</th>
       <th>Tema</th>
       <th>Local</th>
       <th>Data</th>
@@ -39,7 +38,6 @@
         <img *ngIf="mostrarImagem" src="{{ evento.imagem }}" [style.width.px]="imagemLargura"
           [style.margin.px]="imagemMargem">
       </td>
-      <td> {{ evento._id }} </td>
       <td> {{ evento.tema | uppercase }} </td>
       <td> {{ evento.local | uppercase }} </td>
       <td> {{ evento.created_at | DateTimeFormatePipe }} </td>
@@ -52,7 +50,7 @@
           <button class="btn btn-sm btn-primary" tooltip="Editar" (click)="editar(evento,lgModal)">
             <i class="fa fa-edit"></i>
           </button>
-          <button class="btn btn-sm btn-danger" tooltip="Excluir">
+          <button class="btn btn-sm btn-danger" (click)="deletar(evento)" tooltip="Excluir">
             <i class="fa fa-eraser"></i>
           </button>
         </div>

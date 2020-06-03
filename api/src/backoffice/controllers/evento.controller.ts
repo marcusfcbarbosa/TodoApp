@@ -1,4 +1,4 @@
-import { Controller, Post, Body, HttpException, HttpStatus, UseInterceptors, Get, UploadedFile, FileInterceptor, Param, Put } from '@nestjs/common';
+import { Controller, Post, Body, HttpException, HttpStatus, UseInterceptors, Get, UploadedFile, FileInterceptor, Param, Put, Delete } from '@nestjs/common';
 import { Result } from '../../shared/result';
 import { CreateEventoContract } from '../contracts/create-evento.contract';
 import { ValidatorInterceptor } from '../../shared/interceptors/validator.interceptor';
@@ -35,22 +35,29 @@ export class EventoController {
     @UseInterceptors(new ValidatorInterceptor(new UpdateEventoContract()))
     async put(@Param('id') id: string, @Body() command: UpdateEventoCommand) {
         try {
-            let evento = await this.eventoService.update(id,new Evento(command.tema,
-                 command.local
+            let evento = await this.eventoService.update(id, new Evento(command.tema,
+                command.local
                 , command.quantidadePessoas
                 , command.lote
                 , command.image
                 , []
                 , []
                 , []
-                , command.active ));
+                , command.active));
             return evento;
         } catch (error) {
             throw new HttpException(new Result('Erro ao processar requisição', false, null, error), HttpStatus.BAD_REQUEST);
         }
     }
 
-
+    @Delete(':id')
+    async delete(@Param('id') id: string) {
+        try {
+            let evento = await this.eventoService.delete(id);
+        } catch (error) {
+            throw new HttpException(new Result('Erro ao processar requisição', false, null, error), HttpStatus.BAD_REQUEST);
+        }
+    }
 
     @Get('')
     async get() {

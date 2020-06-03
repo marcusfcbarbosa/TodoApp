@@ -62,26 +62,22 @@ export class EventosComponent implements OnInit {
       , telefone: ['', Validators.required]
       , email: ['', [Validators.required, Validators.email]]
     });
+  }
 
-    //validando com FormGroup
-    // this.registerForm = new FormGroup({
-    //   tema: new FormControl(''
-    //     ,
-    //     [Validators.required,
-    //     Validators.minLength(4), Validators.maxLength(50)])
-    //   , local: new FormControl('', Validators.required)
-    //   , dataInicio: new FormControl('', Validators.required)
-    //   , quantidadePessoas: new FormControl(''
-    //     , [Validators.required, Validators.maxLength(120000)])
-    //   , telefone: new FormControl('', Validators.required)
-    //   , email: new FormControl('',
-    //     [Validators.required, Validators.email])
-    // });
+  deletar(evento: Evento) {
+    this.evento = evento;
+    this.eventoService.deleteEvento(this.evento)
+      .subscribe(
+        () => {
+          this.getEventos();
+        }, error => {
+          console.error(error);
+        }
+      );
   }
 
   editar(evento: Evento, template: any) {
     this.modoSalvar = 'put';
-    console.log(this.modoSalvar);
     this.openModal(template);
     this.evento = evento;
     this.registerForm.patchValue(evento);

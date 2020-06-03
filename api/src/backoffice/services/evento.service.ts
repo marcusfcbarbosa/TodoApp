@@ -12,6 +12,10 @@ export class EventoService {
         const user = new this.model(data);
         return await user.save();
     }
+    
+    async delete(id: string){
+        await this.model.find({ _id: id }).remove().exec();
+    }
 
     async findById(id: string): Promise<Evento[]> {
         return await this.model.find({ _id: id }).exec();
