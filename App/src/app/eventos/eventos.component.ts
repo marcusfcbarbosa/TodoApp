@@ -31,6 +31,7 @@ export class EventosComponent implements OnInit {
   eventosFiltrados: any = [];
   _filtroLista: string;
   registerForm: FormGroup;
+  file: File;
 
   constructor(
     private eventoService: EventoService
@@ -69,12 +70,15 @@ export class EventosComponent implements OnInit {
       tema: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(50)]]
       , local: ['', Validators.required]
       , lote: ['', Validators.required]
+      , image: ['', Validators.required]
       , dataInicio: ['', Validators.required]
       , quantidadePessoas: ['', [Validators.required, Validators.maxLength(120000)]]
       , telefone: ['', Validators.required]
       , email: ['', [Validators.required, Validators.email]]
     });
   }
+
+
 
   deletar(evento: Evento) {
     this.evento = evento;
@@ -108,7 +112,6 @@ export class EventosComponent implements OnInit {
 
   salvarAlteracao(template: any) {
     if (this.registerForm.valid) {
-
       if (this.modoSalvar == 'post') {
         this.evento = Object.assign({}, this.registerForm.value);
         this.eventoService.postEvento(this.evento)
@@ -138,6 +141,23 @@ export class EventosComponent implements OnInit {
           );
       }
     }
+  }
+  onFileChange(event) {
+    const reader = new FileReader();
+    if (event.target.files && event.target.files.length) {
+      this.file = event.target.files;
+      this.eventoService.postUpload(this.file)
+        .subscribe(
+          (retorno: Object) => {
+            console.log(retorno);
+          }, error => {
+            console.error(error);
+          }
+        );
+      console.log(this.file);
+
+    }
+    //disparo para um serviço e 
   }
 
   alternarImagem() {

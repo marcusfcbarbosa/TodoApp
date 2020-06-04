@@ -1,4 +1,12 @@
-import { Controller, Post, Body, HttpException, HttpStatus, UseInterceptors, Get, UploadedFile, FileInterceptor, Param, Put, Delete } from '@nestjs/common';
+
+import {
+    Controller, Post, Body, HttpException, HttpStatus,
+    UseInterceptors,
+    Get, UploadedFile,
+    Param, Put, Delete, FileInterceptor, Res
+} from '@nestjs/common';
+
+
 import { Result } from '../../shared/result';
 import { CreateEventoContract } from '../contracts/create-evento.contract';
 import { ValidatorInterceptor } from '../../shared/interceptors/validator.interceptor';
@@ -7,6 +15,7 @@ import { EventoService } from '../services/evento.service';
 import { Evento } from '../models/evento.model';
 import { UpdateEventoCommand } from '../commands/update-evento.command';
 import { UpdateEventoContract } from '../contracts/update-evento.contract';
+import { createWriteStream } from 'fs';
 
 @Controller('v1/Eventos')
 export class EventoController {
@@ -89,10 +98,19 @@ export class EventoController {
         }
     }
 
-
     @Post('upload')
-    @UseInterceptors(FileInterceptor('file'))
-    uploadFile(@UploadedFile() file) {
+    @UseInterceptors(FileInterceptor('image'))
+    async uploadFile(@UploadedFile() file) {
         console.log(file);
+        const path = process.env.UPLOAD_DIRECTORY + file.originalname.replace(/\s/g,'');
+        let wstrem = createWriteStream(path);
+        wstrem.write(file.buffer);
+        wstrem.end();
+        return path;
     }
+
+    // @Get('download')
+    // async download(@Res() res) {
+    //  return res.download("C:\\uploads\\Backend");
+    // }
 }
