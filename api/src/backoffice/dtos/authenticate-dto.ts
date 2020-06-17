@@ -1,8 +1,10 @@
 'use strict'
+import { ApiProperty } from '@nestjs/swagger';
+
 export class AuthenticateDto {
-    constructor(
-        public username: string,
-        public password: string
-    ) {
-    }
+    @ApiProperty()
+    public username: string;
+    @ApiProperty()
+    public password: string;
+
 }

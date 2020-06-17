@@ -24,6 +24,7 @@ import { UserSchema } from './schemas/user.schema';
 import { UserController } from './controllers/user.controller';
 import { AuthService } from './services/auth.service';
 import { JwtStrategy } from './strategies/jwt.strategy';
+import { AccountController } from './controllers/account.controller';
 
 @Module({
     imports:
@@ -64,7 +65,8 @@ import { JwtStrategy } from './strategies/jwt.strategy';
         PalestranteController,
         LoteController,
         RedeSocialController,
-        UserController
+        UserController,
+        AccountController
 
     ],
     providers: [
