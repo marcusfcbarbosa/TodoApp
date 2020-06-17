@@ -6,25 +6,16 @@ import { PalestranteSchema } from './schemas/palestrante.schema';
 import { LoteSchema } from './schemas/lote.schema';
 import { RedeSocialSchema } from './schemas/rede-social.schema';
 
-import { EventoController } from './controllers/evento.controller';
-import { RedeSocialController } from './controllers/rede-social.controller';
-import { LoteController } from './controllers/lote.controller';
-import { PalestranteController } from './controllers/palestrante.controller';
-
-// import { EventoService } from './services/evento.service';
-// import { PalestranteService } from './services/palestrante.service';
-// import { LoteService } from './services/lote.service';
-// import { RedeSocialService } from './services/rede-social.service';
-
 import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
 
 import { BackOfficeServices } from './services';
 import { UserSchema } from './schemas/user.schema';
-import { UserController } from './controllers/user.controller';
+
 import { AuthService } from './services/auth.service';
 import { JwtStrategy } from './strategies/jwt.strategy';
-import { AccountController } from './controllers/account.controller';
+
+import { BackOfficeControllers } from './controllers';
 
 @Module({
     imports:
@@ -61,12 +52,7 @@ import { AccountController } from './controllers/account.controller';
                     },
                 ])],
     controllers: [
-        EventoController,
-        PalestranteController,
-        LoteController,
-        RedeSocialController,
-        UserController,
-        AccountController
+        ...BackOfficeControllers
 
     ],
     providers: [
