@@ -1,12 +1,4 @@
-
-import {
-    Controller, Post, Body, HttpException, HttpStatus,
-    UseInterceptors,
-    Get, UploadedFile,
-    Param, Put, Delete, FileInterceptor, Res
-} from '@nestjs/common';
-
-
+import { Controller, Post, Body, HttpException, HttpStatus, UseInterceptors, Get, UploadedFile, Param, Put, Delete, FileInterceptor, Res } from '@nestjs/common';
 import { Result } from '../../shared/result';
 import { CreateEventoContract } from '../contracts/create-evento.contract';
 import { ValidatorInterceptor } from '../../shared/interceptors/validator.interceptor';
@@ -21,6 +13,7 @@ import { createWriteStream } from 'fs';
 export class EventoController {
 
     constructor(private readonly eventoService: EventoService) { }
+    
     @Post()
     @UseInterceptors(new ValidatorInterceptor(new CreateEventoContract()))
     async post(@Body() command: CreateEventoCommand) {
@@ -102,7 +95,7 @@ export class EventoController {
     @UseInterceptors(FileInterceptor('image'))
     async uploadFile(@UploadedFile() file) {
         console.log(file);
-        const path = process.env.UPLOAD_DIRECTORY + file.originalname.replace(/\s/g,'');
+        const path = process.env.UPLOAD_DIRECTORY + file.originalname.replace(/\s/g, '');
         let wstrem = createWriteStream(path);
         wstrem.write(file.buffer);
         wstrem.end();

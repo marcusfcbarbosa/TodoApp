@@ -11,7 +11,7 @@ export class AuthService {
         private readonly jwtService: JwtService
     ) { }
 
-    async createToken(username: string, document: string, email: string, roles: String[]) {
+    async createToken(username: string, email: string) {
         const user: JwtPayload = {
             username: username,
             email: email
