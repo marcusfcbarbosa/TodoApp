@@ -11,15 +11,32 @@ import { RedeSocialController } from './controllers/rede-social.controller';
 import { LoteController } from './controllers/lote.controller';
 import { PalestranteController } from './controllers/palestrante.controller';
 
-import { EventoService } from './services/evento.service';
-import { PalestranteService } from './services/palestrante.service';
-import { LoteService } from './services/lote.service';
-import { RedeSocialService } from './services/rede-social.service';
+// import { EventoService } from './services/evento.service';
+// import { PalestranteService } from './services/palestrante.service';
+// import { LoteService } from './services/lote.service';
+// import { RedeSocialService } from './services/rede-social.service';
+
+import { PassportModule } from '@nestjs/passport';
+import { JwtModule } from '@nestjs/jwt';
+
+import { BackOfficeServices } from './services';
+import { UserSchema } from './schemas/user.schema';
+import { UserController } from './controllers/user.controller';
+import { AuthService } from './services/auth.service';
+import { JwtStrategy } from './strategies/jwt.strategy';
 
 @Module({
     imports:
         [
             HttpModule,
+            PassportModule.register({ defaultStrategy: 'jwt' }),
+            JwtModule.register(
+                {
+                    secretOrPrivateKey: process.env.SECRET_KEY,
+                    signOptions: {
+                        expiresIn: 3600
+                    },
+                }),
             MongooseModule.forFeature(
                 [
                     {
@@ -37,6 +54,9 @@ import { RedeSocialService } from './services/rede-social.service';
                     {
                         name: 'RedeSocial',
                         schema: RedeSocialSchema,
+                    }, {
+                        name: 'User',
+                        schema: UserSchema,
                     },
                 ])],
     controllers: [
@@ -44,13 +64,14 @@ import { RedeSocialService } from './services/rede-social.service';
         PalestranteController,
         LoteController,
         RedeSocialController,
+        UserController
+
     ],
     providers: [
-        EventoService,
-        PalestranteService,
-        LoteService,
-        RedeSocialService,
-    ],
+        ...BackOfficeServices
+        , AuthService
+        , JwtStrategy
+    ]
 })
 
 export class BackofficeModule { }

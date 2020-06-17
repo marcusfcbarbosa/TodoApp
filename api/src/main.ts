@@ -3,13 +3,18 @@ import { AppModule } from './app.module';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import * as helmet from 'helmet';
 import * as rateLimit from 'express-rate-limit';
+import { CustomLogger } from './services/custom-logger.service';
 
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule, { cors: true });
-  
+  const app = await NestFactory.create(AppModule, {
+    cors: true
+    , logger: new CustomLogger()
+  });
+
+
   app.use(helmet());
-    app.enableCors();
+  app.enableCors();
   app.use(
     rateLimit({
       windowMs: 15 * 60 * 1000, // 15 minutes
