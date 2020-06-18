@@ -1,20 +1,15 @@
 import { Module, HttpModule } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-
 import { EventoSchema } from './schemas/evento.schema';
 import { PalestranteSchema } from './schemas/palestrante.schema';
 import { LoteSchema } from './schemas/lote.schema';
 import { RedeSocialSchema } from './schemas/rede-social.schema';
-
 import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
-
 import { BackOfficeServices } from './services';
 import { UserSchema } from './schemas/user.schema';
-
 import { AuthService } from './services/auth.service';
 import { JwtStrategy } from './strategies/jwt.strategy';
-
 import { BackOfficeControllers } from './controllers';
 
 @Module({
