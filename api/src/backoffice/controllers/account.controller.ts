@@ -23,6 +23,7 @@ export class AccountController {
         const token = await this.authService.createToken(
             user.username,
             user.email);
+            
         return new Result(null, true, {
             name: user.username,
             token: token

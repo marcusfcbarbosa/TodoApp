@@ -6,5 +6,4 @@ export class AuthenticateDto {
     public username: string;
     @ApiProperty()
     public password: string;
-
 }

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { FILE } from 'dns';
+import { User } from 'src/app/models/user';
 
 @Component({
   selector: 'app-registration',
@@ -10,6 +12,7 @@ import { ToastrService } from 'ngx-toastr';
 export class RegistrationComponent implements OnInit {
 
   registerForm: FormGroup;
+  user: User;
 
   constructor(public fb: FormBuilder, private toastr: ToastrService) { }
 
@@ -19,7 +22,12 @@ export class RegistrationComponent implements OnInit {
 
 
   cadastrarUsuario() {
-    console.log('cadastro usuario');
+    if (this.registerForm.valid) {
+      this.user = Object.assign({
+        password: this.registerForm.get('passwords.password').value
+      },this.registerForm.value);
+      console.warn(this.user);
+    }
   }
 
   validation() {
@@ -46,5 +54,6 @@ export class RegistrationComponent implements OnInit {
       }
     }
   }
+
 
 }

@@ -4,4 +4,7 @@ export class Constantes {
     
     //rotas
     static readonly END_POINT_API = 'http://localhost:3000/v1/Eventos';
+
+    static readonly END_POINT_AUTHENTICATION = 'http://localhost:3000/​v1​/accounts​/authenticate';
 }
+
