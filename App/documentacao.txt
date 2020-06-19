@@ -51,7 +51,6 @@ export class EventosComponent implements OnInit {
       }
     );
   }
-
 =====================================
 7- Habilitar o CORS no nest
 	https://docs.nestjs.com/techniques/security#cors
@@ -105,6 +104,34 @@ Obs: não funciona dentro de form, somente dentro de div
   <button class="btn btn-outline-success">Buscar</button>
   </div>
 </div>
+==========================================
+11- pasta 6 Organizando o Projeto
+
+Evento ====> n Palestrante
+Palestrante ====> n Evento
+
+Evento ====> n RedeSociais
+Evento ====> n Lotes
+==========================================
+12- Instalando NGX Bootstrap
+
+https://valor-software.com/ngx-bootstrap/#/documentation#getting-started
+
+<!-- index.html -->
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+npm install ngx-bootstrap --save
+
+Bom para Modal, e outros componentes estilizados de tela ETC
+==========================================
+13- Usando ngx-toastr para notificações de Sucesso , Erro, aviso..etc
+	https://www.npmjs.com/package/ngx-toastr
 	
+	npm install ngx-toastr --save
 	
+	npm install @angular/animations --save
+==========================================
+14- Instalar Jwt no angular
+	https://www.npmjs.com/package/@auth0/angular-jwt
 	
+	npm i @auth0/angular-jwt
