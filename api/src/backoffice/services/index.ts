@@ -6,6 +6,7 @@ import { UserService } from "./user-service";
 import { AccountService } from "./account.service";
 
 
+
 export const BackOfficeServices = [
   EventoService
   , LoteService
@@ -13,4 +14,5 @@ export const BackOfficeServices = [
   , RedeSocialService
   , UserService
   , AccountService
+  
 ];

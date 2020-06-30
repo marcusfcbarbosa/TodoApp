@@ -1,6 +1,10 @@
 //Se ao importar, usassemos asisim ./mongoose siginifica que importamos do diretorio node_modules
 import * as mongoose from 'mongoose';
 export const UserSchema = new mongoose.Schema({
+    name: {
+        type: String,
+        required: true,
+    },
     username: {
         type: String,
         required: true,

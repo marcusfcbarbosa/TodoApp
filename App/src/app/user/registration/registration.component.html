@@ -8,10 +8,10 @@
     <form [formGroup]="registerForm">
       <div class="form-group required">
         <label for="">Nome Completo:</label>
-        <input type="text" class="form-control" formControlName="fullName" [ngClass]="{'is-invalid': registerForm.get('fullName').errors &&
-                                  registerForm.get('fullName').touched }" placeholder="Insira o Nome Completo" />
-        <div *ngIf="registerForm.get('fullName').hasError('required') &&
-                    registerForm.get('fullName').touched" class="invalid-feedback">
+        <input type="text" class="form-control" formControlName="name" [ngClass]="{'is-invalid': registerForm.get('name').errors &&
+                                  registerForm.get('name').touched }" placeholder="Insira o Nome Completo" />
+        <div *ngIf="registerForm.get('name').hasError('required') &&
+                    registerForm.get('name').touched" class="invalid-feedback">
           Nome Completo é obrigatório.
         </div>
       </div>

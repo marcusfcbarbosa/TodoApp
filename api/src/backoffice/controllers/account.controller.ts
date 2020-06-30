@@ -5,14 +5,14 @@ import { Guid } from 'guid-typescript'
 import { AuthService } from '../services/auth.service';
 import { Result } from 'src/shared/result';
 
-@Controller('v1/accounts')
+@Controller('v1/Accounts')
 export class AccountController {
     constructor(private authService: AuthService,
         private readonly accountService: AccountService) {
     }
 
     @Post('authenticate')
-    async authenticate(@Body() model: AuthenticateDto): Promise<any> {
+    async post(@Body() model: AuthenticateDto): Promise<any> {
         const user = await this.accountService.authenticate(model.username, model.password);
         if (!user) {
             throw new HttpException(new Result('Usuário ou senha inválida', false, null, null), HttpStatus.NOT_FOUND);

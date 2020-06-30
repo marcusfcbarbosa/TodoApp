@@ -3,7 +3,10 @@ import { ApiProperty } from '@nestjs/swagger';
 export class CreateUserCommand {
 
     @ApiProperty()
-    public readonly username: string;
+    public readonly name: string;
+
+    @ApiProperty()
+    public readonly userName: string;
 
     @ApiProperty()
     public readonly email: string;

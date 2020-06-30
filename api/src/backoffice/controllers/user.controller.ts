@@ -18,14 +18,15 @@ export class UserController {
         try {
             const password = await Md5.init(`${command.password}${process.env.SALT_KEY}`);
             let user = await this.userService.create(new User(
-                command.username,
+                command.name,
+                command.userName,
                 command.email,
                 password,
                 true
             ));
-            return user;
+            return new Result('', true, user, null);
         } catch (error) {
-            throw new HttpException(new Result('Erro ao processar requisição', false, null, error), HttpStatus.BAD_REQUEST);
+            return new Result('Erro ao processar requisição', false, null, error);
         }
     }
 }
