@@ -10,8 +10,8 @@
   "env": {
     "NODE_ENV": "development",
     "CONNECTION_STRING": "mongodb+srv://marcusfcb:mfcb4625@cluster0-8nqe9.azure.mongodb.net/<dbname>?retryWrites=true&w=majority",
-    "SALT_KEY": "31b5b7e7-79b3-4f98-ad19-4e58600ee3a8",
-    "SECRET_KEY": "6af5fb52-fb62-41c3-98fc-2b892ffd44e2",
+    "SALT_KEY": "517c9e15-5ab0-4f4c-b3e2-c1ebdb045d78",
+    "SECRET_KEY": "91903bb3-4821-49db-a035-4fef8e05f398",
     "UPLOAD_DIRECTORY":"C:\\uploads\\"
   }
 }

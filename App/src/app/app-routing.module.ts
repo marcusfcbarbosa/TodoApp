@@ -14,6 +14,7 @@ const routes: Routes = [
   { path: 'contatos', component: ContatosComponent },
   { path: 'user/login', component: LoginComponent },
   { path: 'user/registration', component: RegistrationComponent },
+  
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   { path: '**', redirectTo: 'dashboard', pathMatch: 'full' }
 ];

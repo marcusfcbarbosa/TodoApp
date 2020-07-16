@@ -11,46 +11,44 @@ import { Observable } from 'rxjs';
 
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
 export class AuthService {
 
-    baseUrl = Constantes.END_POINT_AUTHENTICATION;
+  baseAuthenticationUrl = Constantes.END_POINT_AUTHENTICATION;
 
-    userUrL = Constantes.END_POINT_USER;
+  userUrL = Constantes.END_POINT_USER;
 
-    jwtHelper = new JwtHelperService();
-    decodeToken: any;
+  jwtHelper = new JwtHelperService();
+  decodeToken: any;
 
-    constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-    login(model: AuthenticateDto ) {
-        console.warn(this.baseUrl);
-        console.warn(model);
-        return this.http
-          .post(`${this.baseUrl}`, model)
-          .pipe(map(
-              (response: any) => {
-              const user = response;
-              if (user) {
-                localStorage.setItem('token', user.token);
-                this.decodeToken = this.jwtHelper.decodeToken(user.token);
-                sessionStorage.setItem('username', this.decodeToken.unique_name);
-              }
-            }, error=>{
-                
-            })
-          );
-      }
+  login(model: AuthenticateDto) {
+    return this.http
+      .post(`${this.baseAuthenticationUrl}`, model)
+      .pipe(map(
+        (response: Result) => {
+          const user = response;
+          //this.decodeToken = this.jwtHelper.decodeToken(user.data.token);
+          if (user.success) {
+            localStorage.setItem('token', user.data.token);
+            sessionStorage.setItem('username', this.decodeToken.unique_name);
+          }
+        }, error => {
+          console.log(error.error);
+        })
+      );
+  }
 
-    register(model: User): Observable<Result> {
-        return this.http.post<Result>(`${this.userUrL}`, model);
-    }
+  register(model: User): Observable<Result> {
+    return this.http.post<Result>(`${this.userUrL}`, model); 
+  }
 
-    loggedIn() {
-        const token = localStorage.getItem('token');
-        return !this.jwtHelper.isTokenExpired(token);
-    }
+  loggedIn() {
+    const token = localStorage.getItem('token');
+    return !this.jwtHelper.isTokenExpired(token);
+  }
 
 }
 

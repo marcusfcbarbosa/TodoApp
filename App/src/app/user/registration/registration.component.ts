@@ -27,8 +27,9 @@ export class RegistrationComponent implements OnInit {
   }
 
   exibeErro(erro) {
+
     var validacao = Array.from(erro);
-    validacao.forEach(function(value, index) {
+    validacao.forEach(function (value, index) {
       this.toastr.error(value);
     }.bind(this));
   }
@@ -38,7 +39,7 @@ export class RegistrationComponent implements OnInit {
       this.user = Object.assign({
         password: this.registerForm.get('passwords.password').value
       }, this.registerForm.value);
-      
+
       this.authService.register(this.user).subscribe(
         (retorno: Result) => {
           if (retorno.success) {
@@ -46,9 +47,7 @@ export class RegistrationComponent implements OnInit {
             this.toastr.success('Cadastro Realizado');
           } else {
             var validacao = Array.from(retorno.error);
-            validacao.forEach(function (value, index) {
-              this.toastr.error(value);
-            });
+            this.toastr.error(validacao[0]);
           }
         }
         , error => {

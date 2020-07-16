@@ -94,7 +94,6 @@ export class EventoController {
     @Post('upload')
     @UseInterceptors(FileInterceptor('image'))
     async uploadFile(@UploadedFile() file) {
-        console.log(file);
         const path = process.env.UPLOAD_DIRECTORY + file.originalname.replace(/\s/g, '');
         let wstrem = createWriteStream(path);
         wstrem.write(file.buffer);

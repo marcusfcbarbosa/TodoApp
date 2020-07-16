@@ -11,8 +11,6 @@ async function bootstrap() {
     cors: true
     , logger: new CustomLogger()
   });
-
-
   app.use(helmet());
   app.enableCors();
   app.use(
