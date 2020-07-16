@@ -24,22 +24,33 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  login(model: AuthenticateDto) {
-    return this.http
-      .post(`${this.baseAuthenticationUrl}`, model)
-      .pipe(map(
-        (response: Result) => {
-          const user = response;
-          //this.decodeToken = this.jwtHelper.decodeToken(user.data.token);
-          if (user.success) {
-            localStorage.setItem('token', user.data.token);
-            sessionStorage.setItem('username', this.decodeToken.unique_name);
-          }
-        }, error => {
-          console.log(error.error);
-        })
-      );
+  login(model: AuthenticateDto) : Observable<Result> {
+    return this.http.post<Result>(`${this.baseAuthenticationUrl}`, model); 
   }
+  // login(model: AuthenticateDto) {
+  //   return this.http
+  //     .post(`${this.baseAuthenticationUrl}`, model)
+  //     .pipe(map(
+  //       (response: Result) => {
+  //         const user = response;
+  //         //this.decodeToken = this.jwtHelper.decodeToken(user.data.token);
+  //         if (user.success) {
+  //           localStorage.setItem('token', user.data.token);
+  //           sessionStorage.setItem('username', this.decodeToken.unique_name);
+  //         }else{
+  //           console.log(user);
+  //         }
+  //       }, error => {
+  //         console.log(error.error);
+  //       })
+  //     );
+  // }
+
+  logSession(token: string, username:string){
+    localStorage.setItem('token', token);
+    sessionStorage.setItem('username', username);
+  }
+
 
   register(model: User): Observable<Result> {
     return this.http.post<Result>(`${this.userUrL}`, model); 

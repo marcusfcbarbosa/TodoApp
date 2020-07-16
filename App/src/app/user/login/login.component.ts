@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../../_services/auth.service';
+import { Result } from '../../models/result';
 
 @Component({
   selector: 'app-login',
@@ -19,20 +20,25 @@ export class LoginComponent implements OnInit {
     public authService: AuthService) { }
 
   ngOnInit() {
-
-    // if (localStorage.getItem('token') != null) {
-    //   this.router.navigate(['/dashboard']);
-    // }
+    if (localStorage.getItem('token') != null) {
+      this.router.navigate(['/dashboard']);
+    }
+  }
+  
+  logSession(token: string, username: string){
+    this.authService.logSession(token,username);
   }
 
   login() {
     this.authService.login(this.model)
       .subscribe(
-        () => {
-          this.router.navigate(['/dashboard']);
-          this.toastr.success('Logado com Sucesso');
-        },
-        error => {
+        (response: Result) => {
+          if (response.success) {
+            this.logSession(response.data.token,response.data.name);
+            this.router.navigate(['/dashboard']);
+            this.toastr.success('Logado com Sucesso');
+          }
+        }, error => {
           this.toastr.error('Falha ao tentar Logar');
         }
       );
